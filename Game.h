@@ -8,6 +8,8 @@ namespace T
 	class Game
 	{
 		sf::RenderWindow window;
+		sf::Texture texture;
+		sf::Sprite sprite;
 		sf::CircleShape code[5], rate[5];
 		sf::Event event;
 		sf::Font font;
