@@ -47,6 +47,7 @@ void T::Game::display() { window.display(); }
 void T::Game::updateGame()
 {
 	window.clear();
+	window.draw(sprite);
 	window.draw(code[0]);
 	window.draw(code[1]);
 	window.draw(code[2]);
@@ -238,7 +239,14 @@ T::Game::Game() : lives(15), victory(false)
 	code[2].setPosition(static_cast <float> (130), static_cast <float> (60));
 	code[3].setPosition(static_cast <float> (180), static_cast <float> (60));
 	code[4].setPosition(static_cast <float> (230), static_cast <float> (60));
-	if (!font.loadFromFile("mytype.ttf"))
+	if (!texture.loadFromFile("Resources/Background.jpg"))
+	{
+		throw std::invalid_argument("ERROR! File Not Found\n");
+		return;
+	}
+	sprite.setTexture(texture);
+	sprite.setScale(2, 2);
+	if (!font.loadFromFile("Resources/Font.ttf"))
 	{
 		throw std::invalid_argument("ERROR! File Not Found\n");
 		return;
@@ -247,7 +255,8 @@ T::Game::Game() : lives(15), victory(false)
 	{
 		text[i].setFont(font);
 		text[i].setCharacterSize(20);
-		text[i].setFillColor(sf::Color::White);
+		text[i].setFillColor(sf::Color::Black);
+		text[i].setStyle(sf::Text::Bold);
 	}
 	text[0].setString("Lives: ");
 	text[1].setString("Rate");
